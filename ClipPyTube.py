@@ -1,4 +1,3 @@
-from logging import PercentStyle
 from pytube import YouTube
 from pytube.request import filesize
 from rich import print
