@@ -1,0 +1,7 @@
+requests==2.22.0
+rich==9.12.3
+pytube==10.5.1
+schedule==1.0.0
+pyfiglet==0.8.post1
+pyperclip==1.8.2
+
