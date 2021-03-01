@@ -18,7 +18,6 @@ scriptPath = os.path.dirname(__file__)
 downloadPath =  scriptPath + "/clipTube_Downloads"
 
 prog = Progress(FileSizeColumn(),('/'),TotalFileSizeColumn())
-prog.start()
 
 
 def show_progress_bar(stream, chunk, bytes_remaining):
@@ -27,8 +26,8 @@ def show_progress_bar(stream, chunk, bytes_remaining):
 
 
 def on_complete(stream, file_path):
-    prog.stop_task(task)
     prog.remove_task(task)
+    prog.stop()
     print('[green] Downloaded ', file_path.split('/')[-1],'\n')
 
 
@@ -57,7 +56,7 @@ def download(last_copied):
     global task
     #python the download function is working so no progress thread
     task = prog.add_task("downloading...", total=stream.filesize)
-    prog.start_task(task_id=task)
+    prog.start()
     stream.download(output_path=downloadPath)
     
 
@@ -125,10 +124,8 @@ if __name__ == "__main__":
     stop_run_continuously = run_continuously()
     print("[green]Enter 'q' to quit\n")
     # this produces exception when ctrl + c is pressed
-    inp = input()
-    while inp != "q":
-        inp = input()
-        if inp == 'q':
-            stop_run_continuously.set()
-            print("Bye...! :hand: ")
-            break
+    
+    while input() != 'q':
+        continue
+    stop_run_continuously.set()
+    print("Bye...! :hand: ")
